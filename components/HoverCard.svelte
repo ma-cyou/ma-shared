@@ -1,6 +1,6 @@
 <script lang="ts">
-	import * as Avatar from '$lib/components/ui/avatar/index.js';
-	import * as HoverCard from '$lib/components/ui/hover-card';
+	import * as Avatar from '$shared/components/ui/avatar/index.js';
+	import * as HoverCard from '$shared/components/ui/hover-card';
 
 	export let link: string = 'https://ma.cyou';
 	export let name: string = 'ma.cyou';

@@ -7,13 +7,13 @@
 	import * as DropdownMenu from './ui/dropdown-menu/index.js';
 	import * as Sheet from './ui/sheet/index.js';
 	import * as Avatar from './ui/avatar/index.js';
-	import { Separator } from '$lib/components/ui/separator/index.js';
+	import { Separator } from '$shared/components/ui/separator/index.js';
 
 	import defaultSettings, { type Setting } from './Settings.svelte';
 	import defaultLogo from './Logo.svelte';
 
 	import { page } from '$app/stores';
-	import { language } from '$lib/stores/language';
+	import { language } from '$shared/stores/language';
 	import type { Component } from 'svelte';
 
 	let clazz = '';

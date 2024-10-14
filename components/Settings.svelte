@@ -14,10 +14,10 @@
 </script>
 
 <script lang="ts">
-	import * as Select from '$lib/components/ui/select/index.js';
+	import * as Select from '$shared/components/ui/select/index.js';
 
-	import { theme } from '$lib/stores/theme';
-	import { language } from '$lib/stores/language';
+	import { theme } from '$shared/stores/theme';
+	import { language } from '$shared/stores/language';
 	import { onMount } from 'svelte';
 	import type { Writable } from 'svelte/store';
 

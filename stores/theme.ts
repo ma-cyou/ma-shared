@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import { getCookie, setCookie } from '$lib/utils/cookies';
+import { getCookie, setCookie } from '$shared/utils/cookies';
 
 const getInitialTheme = () => {
 	if (typeof window !== 'undefined') {

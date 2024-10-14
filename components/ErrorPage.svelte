@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { language } from '$lib/stores/language';
+	import { language } from '$shared/stores/language';
 
-	import Logo from '$lib/components/Logo.svelte';
+	import Logo from '$shared/components/Logo.svelte';
 	import ChevronLeft from 'lucide-svelte/icons/chevron-left';
 	import House from 'lucide-svelte/icons/house';
-	import Button from '$lib/components/ui/button/button.svelte';
-	import * as Tooltip from '$lib/components/ui/tooltip/index.js';
+	import Button from '$shared/components/ui/button/button.svelte';
+	import * as Tooltip from '$shared/components/ui/tooltip/index.js';
 
 	let errorStatus: number;
 	let errorMessage: string;
