@@ -22,8 +22,8 @@ jobs:
             git clone https://${{ secrets.PAT }}@github.com/ma-cyou/$repo.git
             cd $repo
             
-            git submodule update --remote src/lib/shared
-            git add src/lib/shared
+            git submodule update --remote src/lib
+            git add src/lib
             git commit -m "Update shared components"
             git push origin main
 
