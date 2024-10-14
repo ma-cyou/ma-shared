@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import { getCookie, setCookie } from '../utils/cookies';
+import { getCookie, setCookie } from '$lib/utils/cookies';
 
 const getInitialLanguage = () => {
 	if (typeof window !== 'undefined') {

@@ -7,7 +7,7 @@ export const setCookie = (
 	secure: boolean = false,
 	sameSite: 'Strict' | 'Lax' | 'None' = 'Lax'
 ) => {
-	domain = null; // FOR DEV SERVER
+	// domain = null; // FOR DEV SERVER
 	let expires = '';
 	if (days === 0) {
 		const neverExpireDate = new Date();
