@@ -16,8 +16,14 @@ jobs:
       - name: Setup Git
         run: |
           git config --global user.name 'ma-cyou'
-          git config --global user.email 'dev.ma.cyou@gmail.com'
+          git config --global user.email ${{ secrets.EMAIL }}
 
       - name: Push changes to target repositories
         run: |
-          git remote add ma https://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@github.com/ma-cyou/ma.git
+          repos=("ma")
+
+          for repo in "${repos[@]}"
+          do
+            git remote | grep $repo || git remote add $repo https://${{ secrets.PAT }}@github.com/ma-cyou/$repo.git
+            git push $repo main || echo "Failed to push to $repo"
+          done
