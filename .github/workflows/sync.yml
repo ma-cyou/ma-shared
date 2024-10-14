@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout the repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup Git
         run: |
@@ -20,10 +20,10 @@ jobs:
 
       - name: Push changes to target repositories
         run: |
-          repos=("ma")
+          repos=("ma")  # Add more repository names here as needed
 
           for repo in "${repos[@]}"
           do
-            git remote add $repo https://${{ secrets.PAT }}@github.com/ma-cyou/$repo.git
-            git push $repo main
+            git remote | grep $repo || git remote add $repo https://${{ secrets.PAT }}@github.com/ma-cyou/$repo.git
+            git push $repo main || echo "Failed to push to $repo"
           done
