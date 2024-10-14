@@ -27,13 +27,13 @@ jobs:
             git clone https://${{ secrets.PAT }}@github.com/ma-cyou/$repo.git
             cd $repo
 
-            if ! git config --file .gitmodules --get-regexp "src/lib" > /dev/null; then
+            if ! git config --file .gitmodules --get-regexp "src/lib/shared" > /dev/null; then
               echo "Submodule not found. Adding it now."
-              git submodule add https://github.com/ma-cyou/ma-shared.git src/lib
+              git submodule add https://github.com/ma-cyou/ma-shared.git src/lib/shared
             fi
 
-            git submodule update --remote src/lib
-            git add src/lib
+            git submodule update --remote src/lib/shared
+            git add src/lib/shared
             git commit -m "Update shared components"
             git push origin main
 
