@@ -20,10 +20,4 @@ jobs:
 
       - name: Push changes to target repositories
         run: |
-          repos=("ma")  # Add more repository names here as needed
-
-          for repo in "${repos[@]}"
-          do
-            git remote | grep $repo || git remote add $repo https://${{ secrets.PAT }}@github.com/ma-cyou/$repo.git
-            git push $repo main || echo "Failed to push to $repo"
-          done
+          git remote add ma https://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@github.com/ma-cyou/ma.git
