@@ -24,6 +24,6 @@ jobs:
 
           for repo in "${repos[@]}"
           do
-            git remote add $repo https://github.com/ma-cyou/$repo.git
+            git remote add $repo https://${{ secrets.PAT }}@github.com/ma-cyou/$repo.git
             git push $repo main
           done
