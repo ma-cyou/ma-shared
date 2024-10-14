@@ -6,24 +6,26 @@ on:
       - main
 
 jobs:
-  sync:
+  update-submodules:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v4
 
-      - name: Setup Git
-        run: |
-          git config --global user.name 'ma-cyou'
-          git config --global user.email ${{ secrets.EMAIL }}
-
-      - name: Push changes to target repositories
+      - name: Update submodules in target repositories
         run: |
           repos=("ma")
 
           for repo in "${repos[@]}"
           do
-            git remote | grep $repo || git remote add $repo https://${{ secrets.PAT }}@github.com/ma-cyou/$repo.git
-            git push $repo main || echo "Failed to push to $repo"
+            git clone https://${{ secrets.PAT }}@github.com/ma-cyou/$repo.git
+            cd $repo
+            
+            git submodule update --remote src/lib/shared
+            git add src/lib/shared
+            git commit -m "Update shared components"
+            git push origin main
+
+            cd ..
           done
