@@ -13,40 +13,34 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v4
 
-      # Step to set up Git user identity
       - name: Setup Git User Identity
         run: |
           git config --global user.name 'ma-cyou'
-          git config --global user.email 'dev.ma.cyou@gmail.com'
+          git config --global user.email '${{ secrets.EMAIL }}'
 
       - name: Push changes to target repositories
         run: |
-          repos=("ma")  # Add more repository names here if needed
-          PAT="${{ secrets.PAT }}"  # Get the PAT from secrets
+          repos=('ma')
+          PAT='${{ secrets.PAT }}'
 
-          for repo in "${repos[@]}"
+          for repo in '${repos[@]}'
           do
-            # Clone the target repository using PAT for authentication
             git clone https://${PAT}@github.com/ma-cyou/$repo.git
             cd $repo
 
-            # Check if the submodule exists
-            if ! git config --file .gitmodules --get-regexp "src/lib/shared" > /dev/null; then
-              echo "Submodule not found. Adding it now."
-              # Use the PAT for the submodule URL
+            if ! git config --file .gitmodules --get-regexp 'src/lib/shared' > /dev/null; then
+              echo 'Submodule not found. Adding it now.'
               git submodule add https://github.com/ma-cyou/ma-shared.git src/lib/shared
             fi
 
-            # Update the submodule (assuming the shared components are within src/lib)
             git submodule update --remote src/lib/shared
             
-            # Check for changes
             if [[ -n $(git status --porcelain) ]]; then
               git add src/lib/shared
-              git commit -m "Update shared components"
-              git push origin main || echo "Failed to push to $repo"
+              git commit -m 'Update shared components'
+              git push origin main || echo 'Failed to push to $repo'
             else
-              echo "No changes to commit in $repo."
+              echo 'No changes to commit in $repo.'
             fi
 
             cd ..
