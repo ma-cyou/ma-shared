@@ -1,0 +1,29 @@
+name: Sync Shared Files
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: Setup Git
+        run: |
+          git config --global user.name 'ma-cyou'
+          git config --global user.email 'dev.ma.cyou@gmail.com'
+
+      - name: Push changes to target repositories
+        run: |
+          repos=("ma")
+
+          for repo in "${repos[@]}"
+          do
+            git remote add $repo https://github.com/ma-cyou/$repo.git
+            git push $repo main
+          done
