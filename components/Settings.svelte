@@ -21,6 +21,9 @@
 	import { onMount } from 'svelte';
 	import type { Writable } from 'svelte/store';
 
+	let clazz = '';
+	export { clazz as class };
+
 	let settings: { [key: string]: Setting } = {
 		theme: {
 			store: theme,
@@ -70,7 +73,9 @@
 	});
 </script>
 
-<div class="flex min-w-[240px] flex-col space-y-4 px-2 py-4 text-sm">
+<div
+	class="{clazz !== '' ? clazz + ' ' : ''}flex min-w-[240px] flex-col space-y-4 px-2 py-4 text-sm"
+>
 	{#each Object.entries(settings) as [key, setting]}
 		<div class="flex items-center space-x-2">
 			<p class="min-w-[48px]">{$language === 'ru' ? setting.nameRu : setting.name}:</p>

@@ -2,6 +2,8 @@
 	import * as Avatar from '$shared/components/ui/avatar/index.js';
 	import * as HoverCard from '$shared/components/ui/hover-card';
 
+	let clazz = '';
+	export { clazz as class };
 	export let link: string = 'https://ma.cyou';
 	export let name: string = 'ma.cyou';
 	export let img: string = 'https://github.com/ma-cyou.png';
@@ -15,7 +17,9 @@
 		href={link}
 		target="_blank"
 		rel="noreferrer noopener"
-		class="rounded-sm underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-black"
+		class="{clazz !== ''
+			? clazz + ' '
+			: ''}rounded-sm underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-black"
 	>
 		{name}
 	</HoverCard.Trigger>
