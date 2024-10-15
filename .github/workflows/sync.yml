@@ -33,7 +33,7 @@ jobs:
               git submodule add https://github.com/ma-cyou/ma-shared.git src/lib/shared
             fi
 
-            git submodule update --remote src/lib/shared
+            git submodule update --init --remote src/lib/shared
             
             if [[ -n $(git status --porcelain) ]]; then
               git add src/lib/shared
