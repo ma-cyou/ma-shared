@@ -42,7 +42,7 @@
 >
 	<nav class="hidden gap-6 text-base font-medium md:flex md:items-center md:gap-4 lg:gap-6">
 		<a href={titleLink} class="flex items-center gap-2 text-lg font-semibold">
-			<Logo class="!size-8 fill-current text-black dark:text-white" />
+			<Logo class="size-8 fill-current text-foreground" />
 			<p class="pb-0.5">{title}</p>
 		</a>
 		<Separator orientation="vertical" class="h-6 bg-muted-foreground bg-opacity-50" />
@@ -67,7 +67,7 @@
 			</span>
 		</Sheet.Trigger>
 		<div class="flex items-center gap-2 font-semibold md:hidden">
-			<Logo class="!size-8 fill-current text-black dark:text-white" />
+			<Logo class="size-8 fill-current text-foreground" />
 			<p>
 				{$language === 'ru'
 					? navLinks[activeLink]?.nameRu || activeLink.split('/')[activeLink.split('/').length - 2]
@@ -77,7 +77,7 @@
 		<Sheet.Content side="left">
 			<nav class="grid gap-6 text-lg font-medium">
 				<a href={titleLink} class="flex items-center gap-2 text-lg font-semibold md:text-base">
-					<Logo class="!size-8 fill-current text-black dark:text-white" />
+					<Logo class="size-8 fill-current text-foreground" />
 					<p>{title}</p>
 				</a>
 				{#each Object.entries(navLinks) as [key, link]}
