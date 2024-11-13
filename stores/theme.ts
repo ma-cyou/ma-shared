@@ -1,25 +1,31 @@
 import { writable } from 'svelte/store';
 import { getCookie, setCookie } from '$shared/utils/cookies';
 
-const getInitialTheme = () => {
+type Theme = 'dark' | 'light';
+
+const getInitialTheme = (): Theme => {
 	if (typeof window !== 'undefined') {
 		const savedTheme = getCookie('theme');
-		if (savedTheme) {
+		if (savedTheme === 'dark' || savedTheme === 'light') {
 			return savedTheme;
 		}
-
-		const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
-		return prefersDarkScheme ? 'dark' : 'light';
+		return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 	}
-
 	return 'light';
 };
 
-export const theme = writable<string>(getInitialTheme());
+export const theme = writable<Theme>(getInitialTheme());
+
+let lastTheme: Theme | null = null;
 
 theme.subscribe((value) => {
-	if (typeof window !== 'undefined') {
-		setCookie('theme', value, 0, 'ma.cyou');
+	if (typeof window !== 'undefined' && value !== lastTheme) {
+		setCookie('theme', value, 365, 'ma.cyou');
 		document.documentElement.classList.toggle('dark', value === 'dark');
+
+		document
+			.querySelector('meta[name="theme-color"]')
+			?.setAttribute('content', value === 'dark' ? '#090a0b' : '#ffffff');
+		lastTheme = value;
 	}
 });

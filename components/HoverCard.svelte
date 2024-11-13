@@ -1,6 +1,6 @@
 <script lang="ts">
-	import * as Avatar from '$shared/components/ui/avatar/index.js';
-	import * as HoverCard from '$shared/components/ui/hover-card';
+	import * as Avatar from './ui/avatar/index.js';
+	import * as HoverCard from './ui/hover-card';
 
 	let clazz = '';
 	export { clazz as class };

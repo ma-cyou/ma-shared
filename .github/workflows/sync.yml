@@ -15,22 +15,22 @@ jobs:
 
       - name: Setup Git User Identity
         run: |
-          git config --global user.name "ma-cyou"
-          git config --global user.email "dev.ma.cyou@gmail.com"
+          git config --global user.name "mapagmataas1331"
+          git config --global user.email "mapagmataas@outlook.com"
 
       - name: Push changes to target repositories
         run: |
-          repos=("ma")
+          repos=("ma" "ngok-better-schedule")
           PAT="${{ secrets.PAT }}"
 
           for repo in "${repos[@]}"
           do
-            git clone https://${PAT}@github.com/ma-cyou/$repo.git
+            git clone https://${PAT}@github.com/mapagmataas1331/$repo.git
             cd $repo
 
             if ! git config --file .gitmodules --get-regexp "src/lib/shared" > /dev/null; then
               echo "Submodule not found. Adding it now."
-              git submodule add https://github.com/ma-cyou/ma-shared.git src/lib/shared
+              git submodule add https://github.com/mapagmataas1331/ma-shared.git src/lib/shared
             fi
 
             git submodule update --init --remote src/lib/shared

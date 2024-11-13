@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { language } from '$shared/stores/language';
+	import { language } from '../stores/language';
 
-	import Logo from '$shared/components/Logo.svelte';
+	import Logo from './Logo.svelte';
 	import ChevronLeft from 'lucide-svelte/icons/chevron-left';
 	import House from 'lucide-svelte/icons/house';
-	import Button from '$shared/components/ui/button/button.svelte';
-	import * as Tooltip from '$shared/components/ui/tooltip/index.js';
+
+	import { Button } from './ui/button/index.js';
+	import * as Tooltip from './ui/tooltip/index.js';
 
 	let errorStatus: number;
 	let errorMessage: string;
@@ -42,40 +43,43 @@
 		<div
 			class="flex w-full flex-row justify-center space-x-16 md:absolute md:inset-0 md:h-8 md:justify-between md:p-4"
 		>
-			<Tooltip.Root>
-				<Tooltip.Trigger asChild let:builder>
-					<Button
-						builders={[builder]}
-						on:click={() => history.back()}
-						variant="ghost"
-						size="icon"
-						class="shrink-0 hover:bg-blue-200 dark:hover:bg-blue-900"
-					>
-						<ChevronLeft class="h-6 w-6" />
-						<span class="sr-only">{$language === 'ru' ? 'Назад' : 'Go back'}</span>
-					</Button>
-				</Tooltip.Trigger>
-				<Tooltip.Content>
-					<p>{$language === 'ru' ? 'Вернуться назад' : 'Go back'}</p>
-				</Tooltip.Content>
-			</Tooltip.Root>
-			<Tooltip.Root>
-				<Tooltip.Trigger asChild let:builder>
-					<Button
-						builders={[builder]}
-						variant="ghost"
-						size="icon"
-						class="shrink-0 hover:bg-blue-200 dark:hover:bg-blue-900"
-						href="/"
-					>
-						<House class="h-6 w-6" />
-						<span class="sr-only">{$language === 'ru' ? 'На главную' : 'Go home'}</span>
-					</Button>
-				</Tooltip.Trigger>
-				<Tooltip.Content>
-					<p>{$language === 'ru' ? 'Вернутся на главную' : 'Go home'}</p>
-				</Tooltip.Content>
-			</Tooltip.Root>
+			<Tooltip.Provider>
+				<Tooltip.Root>
+					<Tooltip.Trigger>
+						<Button
+							variant="ghost"
+							size="icon"
+							class="shrink-0 hover:bg-sky-200 dark:hover:bg-sky-800"
+							onclick={() => history.back()}
+						>
+							<ChevronLeft class="!size-6" />
+							<span class="sr-only">{$language === 'ru' ? 'Вернуться назад' : 'Go back'}</span>
+						</Button>
+					</Tooltip.Trigger>
+					<Tooltip.Content>
+						<p>{$language === 'ru' ? 'Вернуться назад' : 'Go back'}</p>
+					</Tooltip.Content>
+				</Tooltip.Root>
+			</Tooltip.Provider>
+
+			<Tooltip.Provider>
+				<Tooltip.Root>
+					<Tooltip.Trigger>
+						<Button
+							href="/"
+							variant="ghost"
+							size="icon"
+							class="shrink-0 hover:bg-sky-200 dark:hover:bg-sky-800"
+						>
+							<House class="!size-6" />
+							<span class="sr-only">{$language === 'ru' ? 'Вернутся на главную' : 'Go home'}</span>
+						</Button>
+					</Tooltip.Trigger>
+					<Tooltip.Content>
+						<p>{$language === 'ru' ? 'Вернутся на главную' : 'Go home'}</p>
+					</Tooltip.Content>
+				</Tooltip.Root>
+			</Tooltip.Provider>
 		</div>
 	</div>
 </div>
